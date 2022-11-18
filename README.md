@@ -67,3 +67,14 @@ Once the setup.py is installed it automatically creates certain files and folder
 When ever you make changes to requirments.txt file or any thing inside the setup.py file, in order to 
 reexecute and install setup.py again then before execution you need to change the version number inside
 setup.py file code.
+
+
+you can open the ipynb file through vscode and execute your commands as in jupyternotes for that you need to isntall the ipykernel
+
+pip install ipykernel
+
+You need to choose the same conda environment as your housing project, in my case it has automatically considered housing project environment venv only. If it is not selected then if you click on the environment icon in this case venv we can see list of available environments and from that list we need to select our project environment.
+
+
+to read yaml file
+pip install PyYAML
