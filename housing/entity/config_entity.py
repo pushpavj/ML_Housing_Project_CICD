@@ -1,5 +1,9 @@
 from collections import namedtuple
 
+# This config entity file provides the skeleten structure variable for the input 
+# configuration details required by each component. This structure does not 
+# carry any value, value will be passed to this structure throgh configuration.py
+# code which reads the config.yaml file to get the required value.
 DataIngestionConfig=namedtuple("DataIngestionConfig",["dataset_download_url",
 "tgz_download_dir","raw_data_dir","ingested_train_dir","ingested_test_dir"
 ])

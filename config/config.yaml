@@ -1,6 +1,23 @@
+#In this we will define actual configuration values required by configuration
+#entity structure for each component inside the ML file.
+
+#The configuration details are act as external inputs required by the componenet
+#to perform its task. All these details are being provide through this config.yaml
+#file because, if there is any change in the name, or urls we can modify config.ya
+#ml file instead of modifying the code it self.
+
+#Here in config.yaml file we are specifying only the name of the files
+# and folders only actual craeation will happen inside the component code.
+
 training_pipeline_config:
   pipeline_name: housing
   artifact_dir: artifact
+
+#All the ML components comes under the umbrella of pipeline. The pipe line 
+#requires the name. So here our pipeline name is housing.
+#And for each artifacts (input or output file folders) created by each 
+#component requires an artifact folder name for each component, so the 
+#artifact folder name is commonly mentioned over here.
 
 data_ingestion_config:
   dataset_download_url: https://raw.githubusercontent.com/ageron/handson-ml/master/dataset/housing/housing.tgz
@@ -9,10 +26,24 @@ data_ingestion_config:
   ingested_dir: ingested_data
   ingested_train_dir: train
   ingested_test_dir: test
-
+#For example to download the input data set the data ingestion component requires
+#URL detailas from where it can download the file. That url details will be 
+#provided in this confi.yaml file. 
+#Similarly it requies folder names under which it is going to keep the downloaded
+#data, train and test split data...etc.
+#Here in this case the ingestion components will create one main folder as 
+#raw_data and under this folder it creates sub folder named tgz_data in which
+#it will keep the zipped file of the input data set.
+#Similarly it creates one main folder as ingested_data folder under which 
+#it create 2 sub folder as train and test. In each sub folder it will keep the
+#training data set and testing data set respectively.
 
 data_validation_config:
   schema_file_name: schema.yaml
+
+#The data validation component requires the schema file as input to it. That file
+#name details is being provided through this config.yaml
+
 
 data_transformation_config:
   add_bedrooom_per_room: true
@@ -20,17 +51,34 @@ data_transformation_config:
   transformed_train_dir: train
   transformed_test_dir: test
   preprocessing_dir: preprocessed
-  preprocessed_object_file_name: prprocessed.pkl
+  preprocessed_object_file_name: preprocessed.pkl
+#Transformation component will create the transformed data of train and test data
+#and it wants to keep this data in some place, for that it creates transformed_dat
+#a as main folder and train and test as two sub folder in it to keep the transform
+#ed data. This component also create pickle file for the preprocessed, for that
+#it creates the preprocessed folder and the pickle file will be placed in this
+#folder. Here in config.yaml file we are specifying only the name of the files
+# and folders only actual craeation will happen inside the component code.
+
+
 
 model_trainer_config:
   trained_model_dir: trained_model
   model_file_name: model.pkl
   base_accuracy: 0.6
 
+#Model trainer component will create the pickle file for the created model and
+#it will create a folder as trained_model and under this it will keep the pickle
+#file.Here in config.yaml file we are specifying only the name of the files
+# and folders only actual craeation will happen inside the component code.
 
 model_evaluation_config:
-  model_evaluation_file_name: model_evaluation.yaml
+  model_evaluation_file_name: model_evaluation.pkl
+#Model evaluation component will create the pickle file for the model evaluation 
+#Here in config.yaml file we are specifying only the name of the files
+# and folders only actual craeation will happen inside the component code.
 
 model_pusher_config:
   model_export_dir: saved_models
-  
+#Modle pusher will create the folder as saved_models and it keeps all the final
+#model over here  
