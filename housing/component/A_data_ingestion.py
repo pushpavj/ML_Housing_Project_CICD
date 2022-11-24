@@ -226,10 +226,6 @@ class DataIngestion:
             return self.split_data_as_train_test()
     #Returns the data_ingestion_artifact entity output variables
 # as path of train and test files, status of ingested and successfull message 
-
-
-
-
         except Exception as e:
             raise HousingException(e,sys) from e 
 

@@ -139,9 +139,6 @@ class Configuration:
             logging.info(f'TrainingPieplineConfig: {training_pipeline_config}')
             return training_pipeline_config
 
-
-
-
         except Exception as e:
             raise HousingException(e,sys) from e
      

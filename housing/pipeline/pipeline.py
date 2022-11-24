@@ -80,7 +80,7 @@ class Pipeline:
             raise HousingException(Error,sys) from e
 
         
-    def run_pipelint(self):
+    def run_pipeline(self):
         try:
             #data ingestion
             data_ingestion_artifact=self.start_data_ingestion()
