@@ -39,7 +39,10 @@ data_ingestion_config:
 #training data set and testing data set respectively.
 
 data_validation_config:
+  schema_dir: config
   schema_file_name: schema.yaml
+  report_file_name: report.json
+  report_page_file_name: report.html
 
 #The data validation component requires the schema file as input to it. That file
 #name details is being provided through this config.yaml

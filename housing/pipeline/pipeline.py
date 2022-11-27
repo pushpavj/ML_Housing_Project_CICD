@@ -1,6 +1,6 @@
 from aifc import Error
 from housing.config.configuration import Configuration
-from housing.loagger import logging
+from housing.logger import logging
 from housing.exception import HousingException
 import os,sys
 
@@ -40,7 +40,7 @@ class Pipeline:
       
         try:
             data_validation=DataValidation(data_validation_config=self.config.get_data_validation_config())
-            retunr data_validation.initate_data_validation()
+            return data_validation.initate_data_validation()
         
         except Exception as e:
             raise HousingException(Error,sys) from e

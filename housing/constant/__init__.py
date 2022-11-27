@@ -2,7 +2,7 @@ import os,sys
 from datetime import datetime
 ROOT_DIR=os.getcwd()  # to get current working directory
 
-print(ROOT_DIR)
+print('root Dir is', ROOT_DIR)
 CONFIG_DIR="config"
 CONFIG_FILE_NAME="config.yaml"
 CONFIG_FILE_PATH=os.path.join(ROOT_DIR,CONFIG_DIR,CONFIG_FILE_NAME)
@@ -31,7 +31,11 @@ INGESTED_TEST_DIR_KEY='ingested_test_dir'
 
 #Data validation variables 
 DATA_VALIDATION_CONFIG_KEY='data_validation_config'
-SCHEMA_FILE_NAME_KEY='schema_file_name'
+DATA_VALIDATION_SCHEMA_FILE_NAME_KEY='schema_file_name'
+DATA_VALIDATION_SCHEMA_DIR_KEY='schema_dir' 
+DATA_VALIDATION_ARTEFACT_DIR_NAME_KEY="data_validation"
+DATA_VALIDATION_REPORT_FILE_NAME_KEY="report_file_name"
+DATA_VALIDATION_REPROT_PAGE_FILE_NAME_KEY="report_page_file_name"
 
 #data transformation variables
 DATA_TRANSFORMATION_CONFIG_KEY='data_transformation_config'

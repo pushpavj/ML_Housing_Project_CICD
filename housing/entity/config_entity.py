@@ -14,10 +14,13 @@ DataIngestionConfig=namedtuple("DataIngestionConfig",["dataset_download_url",
 # "raw_data_dir",        #Folder name where our extracted input data to be stored
 # "ingested_train_dir",  #Folder name where our train data set to be stored
 # "ingested_test_dir"    #Foldre nema where our test data set will be stored.
-DataValidationConfig=namedtuple("DataValidationConfig",["schema_file_path"])
+DataValidationConfig=namedtuple("DataValidationConfig",["schema_file_path","report_file_path",\
+    "report_page_file_path"])
+
 
 #"schema_file_path" #specifying the location of where is my schema file stored 
 #                   which can be used for validation of injested data set.
+#"report_page_file_path" for saving some graph files
 DataTransofrmationConfig=namedtuple("DataTransformationConfig",["add_bedroom_per_room", 
 "transformed_train_dir",
 "transformed_test_dir",
