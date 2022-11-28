@@ -62,9 +62,11 @@ class DataIngestion:
             logging.info(f'Downloading file from [{download_url} into {tgz_file_path}]')
 #Now download the file housing.tgz from download url and place it in above newly
 #created path
-            urllib.request.urlretrive(download_url,tgz_file_path)
+            urllib.request.urlretrieve(download_url,tgz_file_path)
+            
 
             logging.info(f'File {tgz_file_path} has been downloaded successfully')
+            print('tgz_file_path',tgz_file_path)
 
             return tgz_file_path 
 #returns only the path details where the zipped data set is saved i.e
@@ -96,6 +98,7 @@ class DataIngestion:
 #d:\\user\\jupyternotes\\Praketh\\pycharmforpractice\\ML_Housing\\ML_Housing_Project_CICD\\housing\\artifact_dir//da
     #ta_ingetion\\timestampMMDDYYHHMMSS\\raw_data
             logging.info(f'Extracting tgz file {tgz_file_path} into dir {raw_data_dir}')
+            print("TAR file path",tgz_file_path)
             housing_tgz_file_obj=tarfile.open(tgz_file_path)
 #Gets the zipped file path as below
 ##d:\\user\\jupyternotes\\Praketh\\pycharmforpractice\\ML_Housing\\ML_Housing_Project_CICD\\housing\\artifact_dir//da
@@ -168,7 +171,7 @@ class DataIngestion:
 #d:\\user\\jupyternotes\\Praketh\\pycharmforpractice\\ML_Housing\\ML_Housing_Project_CICD\\housing\\artifact_dir//da
     #ta_ingetion\\timestampMMDDYYHHMMSS\\ingested_data\\test\\housing.csv                                      
             if strat_train_set is not None:
-                os.makedirs(self.initiate_data_ingestion.ingested_train_dir,eixsit=True)
+                os.makedirs(self.data_ingestion_config.ingested_train_dir,exist_ok=True)
 #creating the train folder as below
 #d:\\user\\jupyternotes\\Praketh\\pycharmforpractice\\ML_Housing\\ML_Housing_Project_CICD\\housing\\artifact_dir//da
     #ta_ingetion\\timestampMMDDYYHHMMSS\\ingested_data\\train\\housing.csv
@@ -178,7 +181,7 @@ class DataIngestion:
 #d:\\user\\jupyternotes\\Praketh\\pycharmforpractice\\ML_Housing\\ML_Housing_Project_CICD\\housing\\artifact_dir//da
     #ta_ingetion\\timestampMMDDYYHHMMSS\\ingested_data\\train\\housing.csv
             if strat_test_set is not None:
-                os.makedirs(self.data_ingestion_config.ingested_test_dir,exists=True)
+                os.makedirs(self.data_ingestion_config.ingested_test_dir,exist_ok=True)
 #creating the test file with below path
 # #d:\\user\\jupyternotes\\Praketh\\pycharmforpractice\\ML_Housing\\ML_Housing_Project_CICD\\housing\\artifact_dir//da
     #ta_ingetion\\timestampMMDDYYHHMMSS\\ingested_data\\test\\housing.csv                  
@@ -221,7 +224,7 @@ class DataIngestion:
             # is_ingested=True,
             # message=f'Data ingestion completed succssfully')
         try:
-            tgz_file_path=self.download_housing_data
+            tgz_file_path=self.download_housing_data()
             self.extract_tgz_file(tgz_file_path=tgz_file_path)
             return self.split_data_as_train_test()
     #Returns the data_ingestion_artifact entity output variables

@@ -10,4 +10,5 @@ DataIngestionArtifact=namedtuple('DataIngestionArtifact',["train_file_path",
 # "message"])        Some messages we can pass
 
 
-DataValidationArtifact=namedtuple('DataValidationArtifact',[])
+DataValidationArtifact=namedtuple('DataValidationArtifact',["schema_file_path","report_file_path",
+"report_page_file_path","is_validated","message"])

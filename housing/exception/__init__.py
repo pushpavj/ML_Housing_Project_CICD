@@ -19,7 +19,7 @@ class HousingException(Exception):
 
         error_message=f"""
         Error occured in script: [{file_name}] at try block line number:[{try_block_line_number}] \
-        and excepthion block line number:[{exception_block_number}] 
+        and excepthion block line number:[{exception_block_line_number}] 
         error message:[{error_message}]"""
 
         return error_message 
