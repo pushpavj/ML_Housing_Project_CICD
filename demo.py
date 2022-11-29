@@ -8,10 +8,13 @@ import os, sys
 
 def main():
     try:
-        pipeline=Pipeline()
-        pipeline.run_pipeline()
+        # pipeline=Pipeline()
+        # pipeline.run_pipeline()
         # datavalidationconfig=Configuration().get_data_validation_config()
         # print(datavalidationconfig)
+        datatransformationconfig=Configuration().get_data_transformation_config()
+        print(datatransformationconfig)
+
 
     except Exception as e:
         raise HousingException(e,sys) from e

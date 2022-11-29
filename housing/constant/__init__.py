@@ -38,6 +38,7 @@ DATA_VALIDATION_REPORT_FILE_NAME_KEY="report_file_name"
 DATA_VALIDATION_REPROT_PAGE_FILE_NAME_KEY="report_page_file_name"
 
 #data transformation variables
+DATA_TRANSFORMATION_ARTIFACT_DIR_KEY='data_transformation'
 DATA_TRANSFORMATION_CONFIG_KEY='data_transformation_config'
 ADD_BEDROOM_PER_ROOM_KEY='add_bedrooom_per_room'
 TRANSFORRMED_DIR_KEY='transformed_dir'

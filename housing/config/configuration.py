@@ -137,7 +137,46 @@ class Configuration:
 
 
     def get_data_transformation_config(self)->DataTransofrmationConfig:
-        pass
+        try:
+            artifact_dir=self.training_pipeline_config.artifact_dir
+       #artifact_dir gets the value as  
+    # #d:\\user\\jupyternotes\\Praketh\\pycharmforpractice\\ML_Housing\\ML_Housing_Project_CICD\\housing\\artifact_dir
+            data_trasnformation_artifact_dir=os.path.join(artifact_dir,
+            DATA_TRANSFORMATION_ARTIFACT_DIR_KEY,
+            self.time_stamp)
+
+            data_transformation_config_info=self.config_info[DATA_TRANSFORMATION_CONFIG_KEY]
+            add_bedroom_per_room=data_transformation_config_info[ADD_BEDROOM_PER_ROOM_KEY]
+
+            transformed_train_dir=os.path.join(artifact_dir,
+            data_trasnformation_artifact_dir,
+            data_transformation_config_info[TRANSFORMED_TRAIN_DIR_KEY])
+
+        
+            transformed_test_dir=os.path.join(artifact_dir,
+            data_trasnformation_artifact_dir,
+            data_transformation_config_info[TRANSFORMED_TEST_DIR_KEY])
+
+            preprocessing_object_file_path=os.path.join(artifact_dir,
+            data_trasnformation_artifact_dir,
+            data_transformation_config_info[PREPROCESSING_DIR_KEY],
+            data_transformation_config_info[PREPROCESSD_OBJECT_FILE_NAME_KEY])
+
+
+            data_transformation_config=DataTransofrmationConfig(
+                add_bedroom_per_room=add_bedroom_per_room,
+                transformed_train_dir=transformed_train_dir,
+                transformed_test_dir=transformed_test_dir, 
+                preprocessing_object_file_path=preprocessing_object_file_path)
+            
+            logging.info(f'Data transformation config:{data_transformation_config}')
+
+            return data_transformation_config
+
+
+
+        except Exception as e:
+            raise HousingException(e,sys) from e
 
     def get_model_trainer_config(self)->ModelTrainerConfig:
         pass
