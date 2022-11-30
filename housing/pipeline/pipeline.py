@@ -4,10 +4,12 @@ from housing.logger import logging
 from housing.exception import HousingException
 import os,sys
 
-from housing.entity.artifact_entity import DataIngestionArtifact,DataValidationArtifact
+from housing.entity.artifact_entity import DataIngestionArtifact,DataValidationArtifact, \
+                DataTransformationArtifact
 from housing.entity.config_entity import DataIngestionConfig
 from housing.component.A_data_ingestion import DataIngestion
 from housing.component.B_data_validation import DataValidation 
+from housing.component.C_data_transformation import DataTransformation
 
 class Pipeline:
 
@@ -49,12 +51,17 @@ class Pipeline:
             raise HousingException(Error,sys) from e
 
 
-    # def start_data_transformation(self)->DataTransformationArtifact:
-    #     try:
-    #         data_transformation=DataTransformation(data_transformation_config=self.config.get_data_transformation_config())
-    #         return data_transformation.initiate_data_transformation()
-    #     except Exception as e:
-    #         raise HousingException(Error,sys) from e
+    def start_data_transformation(self,data_ingestion_artifact:DataIngestionArtifact,
+            data_validation_artifact:DataValidationArtifact
+            )->DataTransformationArtifact:
+        try:
+            data_transformation=DataTransformation(
+            data_validation_artifact=data_validation_artifact,
+            data_ingestion_artifact=data_ingestion_artifact,
+            data_transformation_config=self.config.get_data_transformation_config())
+            return data_transformation.initiate_data_transformation()
+        except Exception as e:
+            raise HousingException(Error,sys) from e
 
 
 
@@ -88,7 +95,10 @@ class Pipeline:
             #data ingestion
             data_ingestion_artifact=self.start_data_ingestion()
             data_validation_artifact=self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact)
-            # data_transoformation_artifact=self.start_data_transformation()
+            data_transformation_artifact=self.start_data_transformation(
+                    data_ingestion_artifact=data_ingestion_artifact, 
+                     data_validation_artifact=data_validation_artifact)
+                     
             # data_model_trainer=self.start_data_model_trainer()
             # data_model_evaluation=self.start_data_model_evaluation()
             # data_model_pusher=self.start_model_pusher()

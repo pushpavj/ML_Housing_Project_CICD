@@ -8,6 +8,7 @@ from six.moves import urllib
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import StratifiedShuffleSplit
+import shutil 
 
 
 class DataIngestion:
@@ -62,8 +63,10 @@ class DataIngestion:
             logging.info(f'Downloading file from [{download_url} into {tgz_file_path}]')
 #Now download the file housing.tgz from download url and place it in above newly
 #created path
-            urllib.request.urlretrieve(download_url,tgz_file_path)
-            
+       #     urllib.request.urlretrieve(download_url,tgz_file_path)
+            source_file=os.path.join(os.getcwd(),download_url)
+            print("source_file name=",source_file)
+            shutil.copyfile(src=source_file,dst=tgz_file_path)
 
             logging.info(f'File {tgz_file_path} has been downloaded successfully')
             print('tgz_file_path',tgz_file_path)

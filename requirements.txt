@@ -7,3 +7,4 @@ PyYAML
 six
 evidently
 dill
+matplotlib
