@@ -38,7 +38,7 @@ DataTransofrmationConfig=namedtuple("DataTransformationConfig",["add_bedroom_per
 
 
 ModelTrainerConfig=namedtuple("ModelTrainerConfig",["trained_model_file_path",
-                                                    "base_accuracy"])
+                                                    "base_accuracy","model_config_file_path"])
 
 #"trained_model_file_path", #Location of the pickled file created during model training
 #"base_accuracy"            #supplying the expected accuracy of the model we are building

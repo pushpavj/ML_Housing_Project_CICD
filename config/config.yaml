@@ -70,14 +70,22 @@ model_trainer_config:
   trained_model_dir: trained_model
   model_file_name: model.pkl
   base_accuracy: 0.6
+  model_config_dir: config
+  model_config_file_name: model.yaml
 
 #Model trainer component will create the pickle file for the created model and
 #it will create a folder as trained_model and under this it will keep the pickle
 #file.Here in config.yaml file we are specifying only the name of the files
 # and folders only actual craeation will happen inside the component code.
+#base_accuracy idicate that we are looking for the model whose accuracy should be greater than
+#this base accuracy, then only we will consider that model and push it to production,otherwise the
+#model will not be moved to production.
+#model.yaml here we will be specifying model related configuration details and it will be stored
+#inside the config folder. Here we specify what ML algorithm the model has to use and what are
+#the parameters it should use while training the model.
 
 model_evaluation_config:
-  model_evaluation_file_name: model_evaluation.pkl
+  model_evaluation_file_name: model_evaluation.yaml
 #Model evaluation component will create the pickle file for the model evaluation 
 #Here in config.yaml file we are specifying only the name of the files
 # and folders only actual craeation will happen inside the component code.
