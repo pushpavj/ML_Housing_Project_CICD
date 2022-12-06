@@ -112,12 +112,12 @@ def evaluate_regression_model(model_list:list,
             logging.info(f"{'>>'*30} Started Evaluating model:[{type(model).__name__}]{'<<'*30}")
 
             #Getting predictions for training and testing data set
-            y_train_pred=model.predict(X_train)
-            y_test_pred=model.predict(X_test)
+            y_train_pred=i.predict(X_train)
+            y_test_pred=i.predict(X_test)
 
             #Calculatione r2 score on training and testing dataset
-            train_acc=r2_score(X_train,y_train_pred)
-            test_acc=r2_score(X_test,y_test_pred)
+            train_acc=r2_score(y_train,y_train_pred)
+            test_acc=r2_score(y_test,y_test_pred)
 
             #Calculationg mease squared error on training and testing dataset
             train_rmse=np.sqrt(mean_squared_error(y_train,y_train_pred))
@@ -144,19 +144,22 @@ def evaluate_regression_model(model_list:list,
                 base_accuracy = model_accuracy
                 metric_info_artifact = MetricInfoArtifact(
                 model_name = model_name, 
-                model_object = model, 
+                model_object = i, 
                 train_rmse = train_rmse, 
                 test_rmse = test_rmse, 
-                train_accuracy = train_accuracy, 
-                test_accuracy = test_accuracy)
+                train_accuracy = train_acc, 
+                test_accuracy = test_acc,
+                model_accuracy=model_accuracy,
+                index_number=index_number)
 
-                loggin.info(f"Acceptable Model found [{metric_info_artifact}]")
+                logging.info(f"Acceptable Model found [{metric_info_artifact}]")
             index_number += 1
 
-        if metric_info_artifact = None:
+        if metric_info_artifact == None:
             logging.info(f"No model found with higher accuracy than base accuracy")
             
         return metric_info_artifact
+        
         
     except Exception as e:
         raise HousingException(e,sys) from e
@@ -201,13 +204,13 @@ def get_sample_model_config_yaml_file(export_dir:str):
 
         
 class ModelFactory:
-    def __init__(self,model_config_path:str=None):
+    def __init__(self,model_config_file_path:str=None):
 
         try:
-            self.config: dict=ModelFactory.read_params(model_config_path)
+            self.config: dict=ModelFactory.read_params(model_config_file_path)
             #for calling static function we use classname.function name ex:ModelFactory.read_params
             self.grid_search_cv_module:str=self.config[GRID_SEARCH_KEY][MODULE_KEY]
-            self.gird_search_class_name:str=self.config[GRID_SEARCH_KEY][CLASS_KEY]
+            self.grid_search_class_name:str=self.config[GRID_SEARCH_KEY][CLASS_KEY]
             self.grid_search_property_data:dict=dict(self.config[GRID_SEARCH_KEY][PARAM_KEY])
 
             self.modles_initializaion_config:dict=dict(self.config[MODEL_SELECTION_KEY])
@@ -311,8 +314,8 @@ class ModelFactory:
             for model_serial_number in self.modles_initializaion_config.keys():
 
                 model_initializing_config= self.modles_initializaion_config[model_serial_number]
-                model_obj_ref=ModelFactory.class_for_name(module_name=model_initializing_config[MODEL_SELECTION_KEY])
-
+                model_obj_ref=ModelFactory.class_for_name(module_name=model_initializing_config[MODULE_KEY],
+                                                        class_name=model_initializing_config[CLASS_KEY])
                 model=model_obj_ref()
 
                 if PARAM_KEY in model_initializing_config:
@@ -367,8 +370,8 @@ class ModelFactory:
             raise HousingException(e,sys) from e 
 
 
-    def initiate_best_paramter_search_for_initiated_model(self,
-                                    initialized_model=List[InitializedModelDetail],
+    def initiate_best_parameter_search_for_initialized_models(self,
+                                    initialized_model_list : List[InitializedModelDetail],
                                     input_feature,
                                     output_feature)->List[GridSearchedBestModel]:
 

@@ -182,7 +182,7 @@ class Configuration:
         try:
             artifact_dir=self.training_pipeline_config.artifact_dir
             
-            model_trainer_artifact_dir=os.path.join(arifact_dir,MODEL_EVALUATION_ARTIFACT_DIR,
+            model_trainer_artifact_dir=os.path.join(artifact_dir,MODEL_EVALUATION_ARTIFACT_DIR,
             self.time_stamp)
 
             model_trainer_config_info= self.config_info[MODEL_TRAINER_CONFIG_KEY]

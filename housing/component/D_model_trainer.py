@@ -1,5 +1,5 @@
 from housing.logger import logging
-from housing.exception import HousingExcpetion
+from housing.exception import HousingException
 from housing.config.configuration import Configuration
 from housing.entity.artifact_entity import ModelTrainerArtifact,DataTransformationArtifact
 from housing.entity.config_entity import ModelTrainerConfig
@@ -50,13 +50,13 @@ class ModelTrainer():
             self.data_transofmation_artifact= data_transformation_artifact
 
         except Exception as e:
-            raise HousingExcpetion(e,sys) from e
+            raise HousingException(e,sys) from e
 
     def initiate_model_trainer(self)->ModelTrainerArtifact:
 
         try:
             logging.info(f"Loading transformed trainig data set")
-            transoformed_training_file_path=self.data_transofmation_artifact.transformed_test_file_path
+            transoformed_training_file_path=self.data_transofmation_artifact.transformed_train_file_path
             train_array=load_numpy_array_data(file_path=transoformed_training_file_path)
 
             logging.info(f"Loading transformed testing data set")
@@ -91,15 +91,15 @@ class ModelTrainer():
 
             logging.info(f"Eavaluation of all trained model on training and testing dataset both")
             metric_info:MetricInfoArtifact=evaluate_regression_model(model_list=model_list,
-            X_train=x_train,y_train=y_train)
+            X_train=x_train,y_train=y_train,X_test=x_test,y_test=y_test,base_accuracy=base_accuracy)
 
             logging.info(f"Best found model on both training and testing dataset")
 
-            preprocssing_obj=load_object(file_path=self.data_transofmation_artifact.preprocessing_object_file_path)
+            preprocessing_obj=load_object(file_path=self.data_transofmation_artifact.preprocessing_object_file_path)
             model_object=metric_info.model_object
 
             trained_model_file_path=self.model_trainer_config.trained_model_file_path
-            housing_model=HousingEstimatorModel(preprocssing_object=preprocssing_obj,trained_model_object=model_object)
+            housing_model=HousingEstimatorModel(preprocessing_object=preprocessing_obj,trained_model_object=model_object)
             logging.info(f"Saving model at  path : {trained_model_file_path}")
 
             save_object(file_path=trained_model_file_path,obj=housing_model)
@@ -110,6 +110,7 @@ class ModelTrainer():
             train_rmse=metric_info.train_rmse,
             test_rmse=metric_info.test_rmse,
             train_accuracy=metric_info.train_accuracy,
+            test_accuracy=metric_info.test_accuracy,
             model_accuracy=metric_info.model_accuracy)
 
             logging.info(f"Model traiing successfull: {model_trainer_artifact}")
@@ -117,7 +118,7 @@ class ModelTrainer():
             return model_trainer_artifact
         
         except Exception as e:
-            raise HousingExcpetion(e,sys) from e
+            raise HousingException(e,sys) from e
 
     def __del__(self):
         logging.info(f"{'<<'*30} Model trainer log completed {'<<'*30}")

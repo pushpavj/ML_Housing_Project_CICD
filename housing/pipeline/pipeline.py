@@ -103,7 +103,7 @@ class Pipeline:
                     data_ingestion_artifact=data_ingestion_artifact, 
                      data_validation_artifact=data_validation_artifact)
                      
-            model_trainer_artifact=self.start_data_model_trainer(data_transformation_artifact=data_transformation_artifact)
+            model_trainer_artifact=self.start_model_trainer(data_transformation_artifact=data_transformation_artifact)
             # data_model_evaluation=self.start_data_model_evaluation()
             # data_model_pusher=self.start_model_pusher()
         except Exception as e:

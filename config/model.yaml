@@ -20,7 +20,7 @@ model_selection:
     params:
       min_sample_leaf: 2
     search_param_grid:
-      min_sample_leaf:
+      min_samples_leaf:
       - 4
       - 6
       - 12
@@ -28,12 +28,9 @@ model_selection:
       - 100
       - 200
       bootstrap:
-      - true
-      - False
-      oob_score:
       - True
       - False
-      mas_depth:
+      max_depth:
       - 2
       - 4
       - 6
