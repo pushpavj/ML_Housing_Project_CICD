@@ -5,12 +5,16 @@ from housing.exception import HousingException
 import os,sys
 
 from housing.entity.artifact_entity import DataIngestionArtifact,DataValidationArtifact, \
-                DataTransformationArtifact, ModelTrainerArtifact
+                DataTransformationArtifact, ModelTrainerArtifact,ModelEvaluationArtifact, \
+                    ModelPusherArtifact
 from housing.entity.config_entity import DataIngestionConfig
 from housing.component.A_data_ingestion import DataIngestion
 from housing.component.B_data_validation import DataValidation 
 from housing.component.C_data_transformation import DataTransformation
 from housing.component.D_model_trainer import ModelTrainer
+from housing.component.E_model_evaluation import ModelEvaluation
+from housing.component.F_model_pusher import ModelPusher
+
 
 
 class Pipeline:
@@ -76,7 +80,7 @@ class Pipeline:
         except Exception as e:
             raise HousingException(Error,sys) from e
 
-     def start_model_evaluation(self, data_ingestion_artifact: DataIngestionArtifact,
+    def start_model_evaluation(self, data_ingestion_artifact: DataIngestionArtifact,
                                data_validation_artifact: DataValidationArtifact,
                                model_trainer_artifact: ModelTrainerArtifact) -> ModelEvaluationArtifact:
         try:

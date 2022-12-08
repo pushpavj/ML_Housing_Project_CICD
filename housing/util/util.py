@@ -5,6 +5,9 @@ from housing.exception import HousingException
 import os, sys
 import numpy as np
 import dill 
+import pandas as pd
+from housing.constant import *
+
 
 
 
@@ -77,6 +80,45 @@ def load_object(file_path:str):
         raise HousingException(e,sys) from e 
         
 
+def write_yaml_file(file_path:str,data:dict=None):
+    """
+    Create yaml file 
+    file_path: str
+    data: dict
+    """
+    try:
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+        with open(file_path,"w") as yaml_file:
+            if data is not None:
+                yaml.dump(data,yaml_file)
+    except Exception as e:
+        raise HousingException(e,sys)
+
+
+
+def load_data(file_path: str, schema_file_path: str) -> pd.DataFrame:
+    try:
+        datatset_schema = read_yaml_file(schema_file_path)
+
+        schema = datatset_schema[DATASET_SCHEMA_COLUMNS_KEY]
+
+        dataframe = pd.read_csv(file_path)
+
+        error_messgae = ""
+
+
+        for column in dataframe.columns:
+            if column in list(schema.keys()):
+                dataframe[column].astype(schema[column])
+            else:
+                error_messgae = f"{error_messgae} \nColumn: [{column}] is not in the schema."
+        if len(error_messgae) > 0:
+            raise Exception(error_messgae)
+        return dataframe
+
+    except Exception as e:
+        raise HousingException(e,sys) from e
+    
 
 
 
