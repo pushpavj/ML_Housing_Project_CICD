@@ -27,10 +27,13 @@ class Configuration:
         print("CONFIG FILE PATH2 =", CONFIG_FILE_PATH)
         print("config_file_path =", config_file_path)
         #CONFIG_FILE_PATH is defined under constant which contains the value as path of config.yaml file along with the
-        #file name
+        #file name 
+        #'ML_Housing_Project_CICD\\config\\config.yaml'
+        #CURRENT_TIME_STAMP to get the runtime time stamp
         try:
             self.config_info=read_yaml_file(file_path=config_file_path) #calling the read_yaml_file by passing config.ya
-            #mal file path. Now the self.config_info will have content of config.yaml file as list.
+            #mal file path.
+            #  Now the self.config_info will have content of config.yaml file as list.
             self.training_pipeline_config=self.get_trianing_pipeline_config()
     #Gets config entity variable training_pipeline_config with artifact_dir sub variable got assigned value as
     #d:\\user\\jupyternotes\\Praketh\\pycharmforpractice\\ML_Housing\\ML_Housing_Project_CICD\\housing\\artifact_dir
@@ -148,16 +151,16 @@ class Configuration:
             data_transformation_config_info=self.config_info[DATA_TRANSFORMATION_CONFIG_KEY]
             add_bedroom_per_room=data_transformation_config_info[ADD_BEDROOM_PER_ROOM_KEY]
 
-            transformed_train_dir=os.path.join(artifact_dir,
+            transformed_train_dir=os.path.join(
             data_trasnformation_artifact_dir,
             data_transformation_config_info[TRANSFORMED_TRAIN_DIR_KEY])
 
         
-            transformed_test_dir=os.path.join(artifact_dir,
+            transformed_test_dir=os.path.join(
             data_trasnformation_artifact_dir,
             data_transformation_config_info[TRANSFORMED_TEST_DIR_KEY])
 
-            preprocessing_object_file_path=os.path.join(artifact_dir,
+            preprocessing_object_file_path=os.path.join(
             data_trasnformation_artifact_dir,
             data_transformation_config_info[PREPROCESSING_DIR_KEY],
             data_transformation_config_info[PREPROCESSD_OBJECT_FILE_NAME_KEY])
@@ -188,7 +191,7 @@ class Configuration:
             model_trainer_config_info= self.config_info[MODEL_TRAINER_CONFIG_KEY]
            
             trained_model_file_path = os.path.join(model_trainer_artifact_dir,
-             model_trainer_config_info[MODEL_TRAINER_MODEL_CONFIG_DIR_KEY],
+          #   model_trainer_config_info[MODEL_TRAINER_MODEL_CONFIG_DIR_KEY],
              model_trainer_config_info[MODEL_TRAINER_MODEL_FILE_NAME_KEY])
 
             model_config_file_path= os.path.join(

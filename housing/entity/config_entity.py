@@ -4,9 +4,15 @@ from collections import namedtuple
 # configuration details required by each component. This structure does not 
 # carry any value, value will be passed to this structure throgh configuration.py
 # code which reads the config.yaml file to get the required value.
-DataIngestionConfig=namedtuple("DataIngestionConfig",["dataset_download_url",
-"tgz_download_dir","raw_data_dir","ingested_train_dir","ingested_test_dir"
-])
+DataIngestionConfig=namedtuple("DataIngestionConfig",
+                                [
+                                    "dataset_download_url",
+                                    "tgz_download_dir",
+                                    "raw_data_dir",
+                                    "ingested_train_dir",
+                                    "ingested_test_dir"
+                                ]
+                             )
 
 #"dataset_download_url", #URL of the input data source
 #"tgz_download_dir",     #tgz is the zip file format, here we specify where the zipped input
@@ -14,17 +20,26 @@ DataIngestionConfig=namedtuple("DataIngestionConfig",["dataset_download_url",
 # "raw_data_dir",        #Folder name where our extracted input data to be stored
 # "ingested_train_dir",  #Folder name where our train data set to be stored
 # "ingested_test_dir"    #Foldre nema where our test data set will be stored.
-DataValidationConfig=namedtuple("DataValidationConfig",["schema_file_path","report_file_path",\
-    "report_page_file_path"])
+DataValidationConfig=namedtuple("DataValidationConfig",
+                                [
+                                    "schema_file_path",
+                                    "report_file_path",\
+                                    "report_page_file_path"
+                                ]
+                            )
 
 
 #"schema_file_path" #specifying the location of where is my schema file stored 
 #                   which can be used for validation of injested data set.
 #"report_page_file_path" for saving some graph files
-DataTransofrmationConfig=namedtuple("DataTransformationConfig",["add_bedroom_per_room", 
-"transformed_train_dir",
-"transformed_test_dir",
-"preprocessing_object_file_path"])
+DataTransofrmationConfig=namedtuple("DataTransformationConfig",
+                                    [
+                                        "add_bedroom_per_room", 
+                                        "transformed_train_dir",
+                                        "transformed_test_dir",
+                                        "preprocessing_object_file_path"
+                                    ]
+                                )
 
 #["add_bedroom_per_room",  #Currently there is no beroom_per_room column is not there in my 
 #                        data set. I will pass the value of this "add_bedroom_per_room" as
@@ -37,8 +52,13 @@ DataTransofrmationConfig=namedtuple("DataTransformationConfig",["add_bedroom_per
 #                                    object will be stored
 
 
-ModelTrainerConfig=namedtuple("ModelTrainerConfig",["trained_model_file_path",
-                                                    "base_accuracy","model_config_file_path"])
+ModelTrainerConfig=namedtuple("ModelTrainerConfig",
+                                [
+                                    "trained_model_file_path",
+                                    "base_accuracy",
+                                    "model_config_file_path"
+                                ]
+                            )
 
 #"trained_model_file_path", #Location of the pickled file created during model training
 #"base_accuracy"            #supplying the expected accuracy of the model we are building
@@ -49,8 +69,12 @@ ModelTrainerConfig=namedtuple("ModelTrainerConfig",["trained_model_file_path",
                             #one model which is performing best among them. we do not care 
                             #about other models. so we specify only one file path
 
-ModelEvaluationConfig=namedtuple("ModelEvaluationConfig",["model_evaluation_file_path",
-                                                            "time_stamp"])
+ModelEvaluationConfig=namedtuple("ModelEvaluationConfig",
+                                    [
+                                        "model_evaluation_file_path",
+                                        "time_stamp"
+                                    ]
+                                )
 
 #"model_evaluation_file_path", #we are going to keep the information of our models,
                                #i.e. all the models which exists in production.
@@ -67,13 +91,21 @@ ModelEvaluationConfig=namedtuple("ModelEvaluationConfig",["model_evaluation_file
 #This configuration set up will change or become more complex one based on your project.
 #Here only the basic configuration setup we are doing as we are beginner
 
-ModelPusherConfig=namedtuple("ModelPusherConfig",["export_dir_path"])
+ModelPusherConfig=namedtuple("ModelPusherConfig",
+                                [
+                                    "export_dir_path"
+                                ]
+                            )
 
 #"export_dir_path" # if our new model performing better than the olde model then we save
 #                    that model in this path. This path is same as your production path where
 #                    your old model present.
 
-TrainingPipelineConfig= namedtuple("TrainingPipelineConfig",["artifact_dir"]) 
+TrainingPipelineConfig= namedtuple("TrainingPipelineConfig",
+                                    [
+                                        "artifact_dir"
+                                    ]
+                                ) 
 
 #Above are the information required for the configuration. How we provide all these 
 #information is upto us, we can hard code the values or we can store required information
