@@ -40,7 +40,7 @@ class DataValidation:
 
                 training_file=self.data_ingestion_artifact.train_file_path
                 testing_file=self.data_ingestion_artifact.test_file_path
-                message="Training file { training_file} or testing file {testing_file}"\
+                message=f"Training file { training_file} or testing file {testing_file}"\
                     "is not present"
                 logging.info(message)
                 raise Exception(message)

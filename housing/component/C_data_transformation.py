@@ -112,15 +112,15 @@ class DataTransformation:
         """
         try:
             dataset_schema=read_yaml_file(schema_file_path)
-            schema=dataset_schema[DATASET_SCHEMA_COLUMNS_KEY]
+            schema_columns=dataset_schema[DATASET_SCHEMA_COLUMNS_KEY]
           #  print(schema)
 
             data_frame=pd.read_csv(file_path)
             error_message=" "
 
             for i in data_frame.columns:
-                if i in list(schema.keys()):
-                    data_frame[i].astype(schema[i])
+                if i in list(schema_columns.keys()):
+                    data_frame[i].astype(schema_columns[i])
                 else:
                     error_message=f"{error_message} \n column: [{i}] is not in the schema."
                 #print(error_message)
