@@ -1,7 +1,7 @@
 # ML_Housing_Project_CICD
 Housing Project with CICD pipeline
 
-Clone the project folder from git hub
+## Clone the project folder from git hub
 git clone https://github.com/pushpavj/ML_Housing_Project_CICD.git
 
 Create conda environment
