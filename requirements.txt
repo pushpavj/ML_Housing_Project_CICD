@@ -2,7 +2,7 @@ Flask
 gunicorn
 pandas
 numpy
-sklearn
+scikit-learn
 PyYAML
 six
 evidently
