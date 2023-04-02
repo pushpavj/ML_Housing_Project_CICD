@@ -121,6 +121,9 @@ class ModelTrainer():
             raise HousingException(e,sys) from e
 
     def __del__(self):
+        # In Python, the __del__() method is referred to as a destructor method.
+        # It is called after an object's garbage collection occurs, which happens after
+        # all references to the item have been destroyed.
         logging.info(f"{'<<'*30} Model trainer log completed {'<<'*30}")
 
         

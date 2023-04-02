@@ -1,5 +1,8 @@
 import os,sys
 from datetime import datetime
+
+def get_current_time_stamp():
+    return f"{datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}"
 ROOT_DIR=os.getcwd()  # to get current working directory
 
 print('root Dir is', ROOT_DIR)
@@ -68,7 +71,7 @@ MODEL_EVALUATION_ARTIFACT_DIR='model_evaluation'
 
 #model pusher variables
 MODEL_PUSHER_CONFIG_KEY='model_pusher_config'
-MODEL_EXPORT_DIR_KEY='model_export_dir'
+MODEL_PUSHER_MODEL_EXPORT_DIR_KEY='model_export_dir'
 
 BEST_MODEL_KEY='best_model'
 HISTORY_KEY='history'

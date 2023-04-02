@@ -1,2 +1,5 @@
 best_model:
-  model_path: D:\user\jupyternotes\Praketh\pycharmforpractice\ML_Housing\ML_Housing_Project_CICD\housing\artifact\model_evaluation\2022-12-08-22-43-56\config\model.pkl
+  model_path: D:\user\jupyternotes\Praketh\pycharmforpractice\ML_Housing\ML_Housing_Project_CICD\housing\artifact\model_trainer\2022-12-21-14-50-41\model.pkl
+history:
+  2022-12-21-14-50-41:
+    model_path: D:\user\jupyternotes\Praketh\pycharmforpractice\ML_Housing\ML_Housing_Project_CICD\housing\artifact\model_trainer\2022-12-16-13-51-13\model.pkl

@@ -14,7 +14,7 @@ from housing.constant import *
 def read_yaml_file(file_path:str)->dict:
     """
     Reads a YAML file  and returns the contents as dictionary.
-    file_path: string
+    file_path: string 'D:\\user\\jupyternotes\\Praketh\\pycharmforpractice\\ML_Housing\\ML_Housing_Project_CICD\\config\\config.yaml'
     """
 
     try:
